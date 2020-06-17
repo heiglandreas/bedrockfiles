@@ -1,0 +1,24 @@
+{
+	"name": "org_heigl/bedrockfiles",
+	"type": "composer-plugin",
+	"require": {
+		"php": "^7.4||^8.0",
+		"composer-plugin-api": "^1.1||^2.0"
+	},
+	"extra": {
+		"class": "Org_Heigl\\BedrockFiles\\Plugin"
+	},
+	"autoload": {
+		"psr-4": {
+			"Org_Heigl\\BedrockFiles\\" : "src/"
+		}
+	},
+	"autoload-dev": {
+		"psr-4": {
+			"Org_Heigl\\BedrockFilesTest\\": "tests/"
+		}
+	},
+	"require-dev": {
+		"phpunit/phpunit": "^9.2"
+	}
+}
