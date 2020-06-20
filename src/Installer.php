@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Org_Heigl\BedrockFiles;
 
+use Composer\IO\IOInterface;
 use FilesystemIterator;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
@@ -22,13 +23,16 @@ class Installer
 	/** @var RecursiveIteratorIterator  */
 	private $sourcePath;
 
-	public function __construct(SplFileInfo $targetPath)
+	private $io;
+
+	public function __construct(SplFileInfo $targetPath, IOInterface $io)
 	{
 		$this->sourcePath = new RecursiveDirectoryIterator(
 			dirname(__DIR__) . '/share',
 			FilesystemIterator::SKIP_DOTS ^ FilesystemIterator::KEY_AS_FILENAME ^ FilesystemIterator::CURRENT_AS_FILEINFO
 		);
 		$this->targetPath = $targetPath;
+		$this->io = $io;
 	}
 
 	public function install(): void
@@ -45,6 +49,7 @@ class Installer
 			if (! file_exists(dirname($newFileName))) {
 				$this->mkdirr(dirname($newFileName));
 			}
+			$this->io->write(sprintf('Creating %s', $newFileName));
 			copy($item->getPathname(), $newFileName);
 		}
 	}
