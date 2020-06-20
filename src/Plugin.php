@@ -17,8 +17,7 @@ class Plugin implements PluginInterface
 	 */
 	public function activate(Composer $composer, IOInterface $io)
 	{
-		$io->write(dirname(dirname(dirname(__DIR__))));
-		$installer = new Installer(new SplFileInfo(dirname(dirname(dirname(__DIR__)))));
+		$installer = new Installer(new SplFileInfo(dirname(dirname(dirname(dirname(__DIR__))))));
 		$installer->install();
 	}
 
